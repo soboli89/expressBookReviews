@@ -54,12 +54,32 @@ public_users.get('/author/:author',function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
+
+
+  var keys = Object.keys( books );
+  let title = req.params.title; 
+  let filtered_books = {};
+  for( var i = 0; i < keys.length; i++ ) {
+    if ((Object.values(books)[i].title) == title){
+       filtered_books[i] = (Object.values(books)[i]);
+    }  
+  };
+  res.send(filtered_books);
+
+
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
+  var keys = Object.keys( books );
+    const isbn = req.params.isbn;
+    for (let i=0; i<keys.length-1; i++){
+        if (keys[i] === isbn){
+            return res.send (Object.values(books)[i].reviews);
+    }
+  }
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
