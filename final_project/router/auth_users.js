@@ -2,8 +2,14 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 let books = require("./booksdb.js");
 const regd_users = express.Router();
+const JWT_SECRET= "Secret";
 
-let users = [];
+let users = [
+    {
+        username: "Vik",
+        password: "1989"
+    }
+];
 
 const isValid = (username)=>{ //returns boolean
 //write code to check is the username is valid
@@ -16,7 +22,16 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+   const {username, pwd} = req.body;
+    if(username==="username" && password ==="password"){
+        return res.json({
+            token: jwt.JsonWebTokenError.sign({user: "username"}, JWT_SECRET),
+        });
+    }
+    return res
+        .status(401)
+        .json({message: "Invalid username and/or password"});
+ // return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Add a book review
