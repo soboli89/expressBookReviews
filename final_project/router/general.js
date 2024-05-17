@@ -4,13 +4,27 @@ let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
 
+public_users.get('/users',function (req, res) {
+    //Write your code here
+      
+    res.send(JSON.stringify(users));
+});
+
+
 
 public_users.post("/register", (req,res) => {
     //Write your code here
-        users.push({"username":req.query.username,"password":req.query.password});
-        res.send("The user" + (' ')+ (req.query.firstName) + " Has been added!")
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+    //console.log(req.query.password);
+   for(let i=0; i<users.length; i++){
+       console.log(req.query.username);
+     if (users[i].username === req.query.username){
+         // console.log("good");
+            return res.send("The user" + (' ') + (req.query.username)+ (' ') + "Already Exists! Login or choose another user id")
+    } else {
+        users.push({"username":req.query.username,"password":req.query.password}); 
+       return res.send("The user" + (' ')+ (req.query.username) + " Has been added!")
+ // return res.status(300).json({message: "Yet to be implemented"});*/
+}}});
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {

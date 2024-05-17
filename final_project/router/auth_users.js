@@ -11,6 +11,7 @@ let users = [
     }
 ];
 
+
 const isValid = (username)=>{ //returns boolean
 //write code to check is the username is valid
 }
@@ -23,7 +24,7 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 regd_users.post("/login", (req,res) => {
   //Write your code here
    const {username, pwd} = req.body;
-    if(username==="username" && password ==="password"){
+    if(username==="username" && pwd ==="password"){
         return res.json({
             token: jwt.JsonWebTokenError.sign({user: "username"}, JWT_SECRET),
         });
